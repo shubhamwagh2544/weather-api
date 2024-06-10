@@ -1,8 +1,8 @@
 import express from 'express';
-import getHistoricalData from '../controllers/historyController';
-import authenticateApiKey from '../middlewares/authMiddleware';
-const router = express.Router()
+import getHistoricalData from '../controllers/historyController.js';
+import authenticateApiKey from '../middlewares/authMiddleware.js';
+const historyRouter = express.Router()
 
-router.get('/history/locationId', authenticateApiKey, getHistoricalData)
+historyRouter.get('/locationId', authenticateApiKey, getHistoricalData)
 
-export default router
+export default historyRouter

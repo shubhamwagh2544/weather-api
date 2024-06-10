@@ -1,5 +1,8 @@
 import axios from "axios"
-import { WEATHER_BASE_URI } from "../config/urlconfig"
+import dotenv from 'dotenv'
+import { WEATHER_BASE_URI } from "../config/urlconfig.js"
+import { checkIfLocationExists } from "./locationController.js"
+dotenv.config()
 
 function getDateBasedOnDays(days) {
     const date = new Date()

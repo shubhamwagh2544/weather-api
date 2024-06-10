@@ -1,4 +1,4 @@
-import Location from "../models/locationModel"
+import Location from "../models/locationModel.js"
 
 export async function checkIfLocationExists(locationId) {
     const location = await Location.findOne({
@@ -134,9 +134,6 @@ async function deleteLocation(req, res, next) {
 }
 
 export {
-    getAllLocations,
-    addLocation,
-    getLocation,
-    updateLocation,
-    deleteLocation
+    addLocation, deleteLocation, getAllLocations, getLocation,
+    updateLocation
 }

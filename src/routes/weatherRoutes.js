@@ -1,8 +1,8 @@
 import express from 'express'
-import getWeatherData from '../controllers/weatherController'
-import authenticateApiKey from '../middlewares/authMiddleware'
-const router = express.router()
+import getWeatherData from '../controllers/weatherController.js'
+import authenticateApiKey from '../middlewares/authMiddleware.js'
+const weatherRouter = express.Router()
 
-router.get('/weather/:locationId', authenticateApiKey, getWeatherData)
+weatherRouter.get('/:locationId', authenticateApiKey, getWeatherData)
 
-export default router
+export default weatherRouter
