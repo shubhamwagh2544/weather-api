@@ -62,7 +62,7 @@ async function getLocation(req, res, next) {
                 message: 'invalid location'
             })
         }
-        const location = checkIfLocationExists(locationId)
+        const location = await checkIfLocationExists(locationId)
         if (!location) {
             return res.status(404).json({
                 message: 'location not found'
@@ -85,7 +85,7 @@ async function updateLocation(req, res, next) {
                 message: 'invalid location'
             })
         }
-        const location = checkIfLocationExists(locationId)
+        const location = await checkIfLocationExists(locationId)
         if (!location) {
             return res.status(404).json({
                 message: 'location not found'
@@ -114,7 +114,7 @@ async function deleteLocation(req, res, next) {
                 message: 'invalid location'
             })
         }
-        const location = checkIfLocationExists(locationId)
+        const location = await checkIfLocationExists(locationId)
         if (!location) {
             return res.status(404).json({
                 message: 'location not found'

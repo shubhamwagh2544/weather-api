@@ -19,14 +19,14 @@ export default async function getHistoricalData(req, res, next) {
     // we need location to get historical data of specific location
     try {
         const locationId = req.params.locationId
-        const days = req.query.dt
+        const days = req.body.days
 
         if (!locationId || !days) {
             return res.status(400).json({
                 message: 'invalid input query data'
             })
         }
-        const location = checkIfLocationExists(locationId)
+        const location = await checkIfLocationExists(locationId)
         if (!location) {
             return res.status(404).json({
                 message: 'location not found'
@@ -37,15 +37,22 @@ export default async function getHistoricalData(req, res, next) {
         const date = getDateBasedOnDays(days)
         const latitude = location.latitude
         const longitude = location.longitude
+        const apikey = process.env.WEATHER_API_KEY
 
-        const response = await axios.get(`${WEATHER_BASE_URI}/history.json?key=${process.env.WEATHER_API_KEY}&q=${latitude},${longitude}&dt=${date}`)
+        if (!apikey) {
+            return res.status(403).json({
+                message: 'unathorized'
+            })
+        }
+
+        const response = await axios.get(`${WEATHER_BASE_URI}/history.json?key=${apikey}&q=${latitude},${longitude}&dt=${date}`)
 
         if (!response) {
             return res.status(400).json({
                 message: 'no response from history api'
             })
         }
-        return res.status(200).json(response)
+        return res.status(200).json(response.data)
     }
     catch (err) {
         console.log('error getting historical data')
