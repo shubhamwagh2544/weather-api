@@ -1,4 +1,6 @@
-async function checkIfLocationExists(locationId) {
+import Location from "../models/locationModel"
+
+export async function checkIfLocationExists(locationId) {
     const location = await Location.findOne({
         _id: locationId
     })
